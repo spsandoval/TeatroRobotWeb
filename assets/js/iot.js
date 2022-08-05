@@ -55,7 +55,7 @@
 //     document.getElementById('ejecutor').textContent = message.payloadString;
 // }
 
-const client  = mqtt.connect('wss://44.207.109.249:9001/mqtt', {
+const client  = mqtt.connect('ws://44.207.109.249:9001/mqtt', {
   username: 'randy',
   password: 'teatro01'
 });
