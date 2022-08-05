@@ -1,8 +1,8 @@
 // ssh -i "TeatroRobot.pem" ubuntu@ec2-44-207-109-249.compute-1.amazonaws.com
 
-const clientId = "ws" + Math.random();
+const clientId = "wss" + Math.random();
 // Create a client instance
-const client = new Paho.MQTT.Client("44.207.109.249", 9001, clientId);
+const client = new Paho.MQTT.Client("44.207.109.249", 9001, 'ewfwe',clientId);
 
 // set callback handlers
 client.onConnectionLost = onConnectionLost;
@@ -10,7 +10,7 @@ client.onMessageArrived = onMessageArrived;
 
 // connect the client
 client.connect({onSuccess:onConnect, userName: 'randy',
-password: 'teatro01'});
+password: 'teatro01', useSSL});
 
 
 // called when the client connects
