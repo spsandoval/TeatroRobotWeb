@@ -1,4 +1,4 @@
-const clientId = "wss" + Math.random();
+const clientId = "ws" + Math.random();
 // Create a client instance
 const client = new Paho.MQTT.Client("broker.hivemq.com", 8884, clientId);
 
@@ -7,7 +7,12 @@ client.onConnectionLost = onConnectionLost;
 client.onMessageArrived = onMessageArrived;
 
 // connect the client
-client.connect({onSuccess:onConnect});
+client.connect(
+  {
+    onSuccess:onConnect,
+    useSSL: true
+  }
+);
 
 // called when the client connects
 function onConnect() {
