@@ -1,4 +1,4 @@
-const clientId = "ws" + Math.random();
+const clientId = "wss" + Math.random();
 // Create a client instance
 const client = new Paho.MQTT.Client("broker.hivemq.com", 8000, clientId);
 
