@@ -1,17 +1,13 @@
-// ssh -i "TeatroRobot.pem" ubuntu@ec2-44-207-109-249.compute-1.amazonaws.com
-
 const clientId = "ws" + Math.random();
 // Create a client instance
-const client = new Paho.MQTT.Client("44.207.109.249", 9001, clientId);
+const client = new Paho.MQTT.Client("broker.hivemq.com", 8000, clientId);
 
 // set callback handlers
 client.onConnectionLost = onConnectionLost;
 client.onMessageArrived = onMessageArrived;
 
 // connect the client
-client.connect({onSuccess:onConnect, userName: 'randy',
-password: 'teatro01'});
-
+client.connect({onSuccess:onConnect});
 
 // called when the client connects
 function onConnect() {
@@ -25,6 +21,96 @@ function onConnect() {
   client.subscribe('teatro/escenarioprep');
   client.subscribe('teatro/accion');
   client.subscribe('teatro/ejecutor');
+  client.subscribe('plataformasubir');
+  client.subscribe('plataformabajar');
+  client.subscribe('plataformadetener');
+  client.subscribe('telonsubir');
+  client.subscribe('telonbajar');
+  client.subscribe('telondetener');
+  client.subscribe('humoencender');
+  client.subscribe('humoapagar');
+  client.subscribe('luzAencender');
+  client.subscribe('luzAapagar');
+  client.subscribe('luzBencender');
+  client.subscribe('luzBapagar');
+}
+
+/* Funciones Plataforma */
+const onPlatformUp = () => {
+  message = new Paho.MQTT.Message("4");
+  message.destinationName = 'plataformasubir'
+  client.send(message);
+}
+
+const onPlatformDown = () => {
+  message = new Paho.MQTT.Message("5");
+  message.destinationName = 'plataformabajar'
+  client.send(message);
+}
+
+const onPlatformStop = () => {
+  message = new Paho.MQTT.Message("6");
+  message.destinationName = 'plataformadetener'
+  client.send(message);
+}
+
+/* Funciones Telon */
+const onScenaryOpen = () => {
+  message = new Paho.MQTT.Message("2");
+  message.destinationName = 'telonsubir'
+  client.send(message);
+}
+
+const onScenaryClose = () => {
+  message = new Paho.MQTT.Message("3");
+  message.destinationName = 'telonbajar'
+  client.send(message);
+}
+
+const onScenaryStop = () => {
+  message = new Paho.MQTT.Message("1");
+  message.destinationName = 'telondetener'
+  client.send(message);
+}
+
+/* Funciones máquina de humo */
+const onSmokeMachineOn = () => {
+  message = new Paho.MQTT.Message("x");
+  message.destinationName = 'humoencender'
+  client.send(message);
+}
+
+const onSmokeMachineOff = () => {
+  message = new Paho.MQTT.Message("y");
+  message.destinationName = 'humoapagar'
+  client.send(message);
+}
+
+/* Funciones Luces */
+/* Luces Principales */
+const onMainLightsOn = () => {
+  message = new Paho.MQTT.Message("7");
+  message.destinationName = 'luzAencender'
+  client.send(message);
+}
+
+const onMainLightsOff = () => {
+  message = new Paho.MQTT.Message("8");
+  message.destinationName = 'luzAapagar'
+  client.send(message);
+}
+
+/* Luces Secundarias */
+const onSecondaryLightsOn = () => {
+  message = new Paho.MQTT.Message("9");
+  message.destinationName = 'luzBencender'
+  client.send(message);
+}
+
+const onSecondaryLightsOff = () => {
+  message = new Paho.MQTT.Message("0");
+  message.destinationName = 'luzBapagar'
+  client.send(message);
 }
 
 // called when the client loses its connection
