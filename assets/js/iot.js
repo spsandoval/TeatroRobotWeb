@@ -1,6 +1,6 @@
 const clientId = "wss" + Math.random();
 // Create a client instance
-const client = new Paho.MQTT.Client("broker.hivemq.com", 8000, clientId);
+const client = new Paho.MQTT.Client("broker.hivemq.com", 8884, clientId);
 
 // set callback handlers
 client.onConnectionLost = onConnectionLost;
