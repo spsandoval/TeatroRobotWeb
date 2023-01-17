@@ -1,7 +1,13 @@
 /* Page styles */
 
-body {
+.home {
   background-image: url('https://www.eluniverso.com/resizer/cMBj8gcONyVa6w6vOYrfQFhKBhE=/1198x670/smart/filters:quality(70)/cloudfront-us-east-1.images.arcpublishing.com/eluniverso/KZ42GORTMRANDGT6GGDXDEF7U4.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.controls {
+  background-image: url('../img/bg_controls.jpeg');
   background-repeat: no-repeat;
   background-size: cover;
 }
